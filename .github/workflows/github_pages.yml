@@ -17,6 +17,16 @@ on:
         default: "output/"
         description: "Where to output the generated files (`pelican`'s `--output` option)"
         type: string
+      theme:
+        required: false
+        default: ""
+        description: "The GitHub repo URL of a custom theme to use, for example: 'https://github.com/seanh/sidecar.git'"
+        type: string
+      python:
+        required: false
+        default: "3.12"
+        description: "The version of Python to use, for example: '3.12' (to use the most recent version of Python 3.12, this is faster) or '3.12.1' (to use an exact version, slower)"
+        type: string
 permissions:
   contents: read
   pages: write
@@ -33,18 +43,31 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: ${{ inputs.python }}
+      - name: Checkout theme
+        if: ${{ inputs.theme }}
+        run: git clone '${{ inputs.theme }}' .theme
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v3
       - name: Install requirements
         run: pip install ${{ inputs.requirements }}
       - name: Build Pelican site
+        shell: python
         run: |
-          pelican \
-            --settings "${{ inputs.settings }}" \
-            --extra-settings SITEURL='"${{ steps.pages.outputs.base_url }}"' \
-            --output "${{ inputs.output-path }}"
+          import subprocess
+
+          cmd = "pelican"
+          cmd += " --settings ${{ inputs.settings }}"
+          cmd += " --extra-settings"
+          cmd += """ SITEURL='"${{ steps.pages.outputs.base_url }}"'"""
+          cmd += """ FEED_DOMAIN='"${{ steps.pages.outputs.origin }}"'"""
+          cmd += " --output ${{ inputs.output-path }}"
+
+          if "${{ inputs.theme }}":
+              cmd += " --theme-path .theme"
+
+          subprocess.run(cmd, shell=True, check=True)
       - name: Fix permissions
         run: |
           chmod -c -R +rX "${{ inputs.output-path }}" | while read line; do

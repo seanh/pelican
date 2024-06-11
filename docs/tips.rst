@@ -163,8 +163,8 @@ Pelican-powered sites can be published to GitHub Pages via a `custom workflow
 
 Notes:
 
-* You don't need to set ``SITEURL`` in your Pelican settings: the workflow will
-  set it for you
+* You don't need to set ``SITEURL`` or ``FEED_DOMAIN`` in your Pelican
+  settings: the workflow will set them correctly for you
 
 * You don't need to commit your ``--output`` / ``OUTPUT_PATH`` directory
   (``output/``) to git: the workflow will run ``pelican`` to build the output
@@ -176,25 +176,35 @@ for more information.
 A number of optional inputs can be added to the ``with:`` block when calling
 the workflow:
 
-+--------------+----------+-----------------------------------+--------+---------------+
-| Name         | Required | Description                       | Type   | Default       |
-+==============+==========+===================================+========+===============+
-| settings     | Yes      | The path to your Pelican settings | string |               |
-|              |          | file (``pelican``'s               |        |               |
-|              |          | ``--settings`` option),           |        |               |
-|              |          | for example: ``"publishconf.py"`` |        |               |
-+--------------+----------+-----------------------------------+--------+---------------+
-| requirements | No       | The Python requirements to        | string | ``"pelican"`` |
-|              |          | install, for example to enable    |        |               |
-|              |          | markdown and typogrify use:       |        |               |
-|              |          | ``"pelican[markdown] typogrify"`` |        |               |
-|              |          | or if you have a requirements     |        |               |
-|              |          | file: ``"-r requirements.txt"``   |        |               |
-+--------------+----------+-----------------------------------+--------+---------------+
-| output-path  | No       | Where to output the generated     | string | ``"output/"`` |
-|              |          | files (``pelican``'s ``--output`` |        |               |
-|              |          | option)                           |        |               |
-+--------------+----------+-----------------------------------+--------+---------------+
++--------------+----------+--------------------------------------------+--------+---------------+
+| Name         | Required | Description                                | Type   | Default       |
++==============+==========+============================================+========+===============+
+| settings     | Yes      | The path to your Pelican settings          | string |               |
+|              |          | file (``pelican``'s                        |        |               |
+|              |          | ``--settings`` option),                    |        |               |
+|              |          | for example: ``"publishconf.py"``          |        |               |
++--------------+----------+--------------------------------------------+--------+---------------+
+| requirements | No       | The Python requirements to                 | string | ``"pelican"`` |
+|              |          | install, for example to enable             |        |               |
+|              |          | markdown and typogrify use:                |        |               |
+|              |          | ``"pelican[markdown] typogrify"``          |        |               |
+|              |          | or if you have a requirements              |        |               |
+|              |          | file: ``"-r requirements.txt"``            |        |               |
++--------------+----------+--------------------------------------------+--------+---------------+
+| output-path  | No       | Where to output the generated              | string | ``"output/"`` |
+|              |          | files (``pelican``'s ``--output``          |        |               |
+|              |          | option)                                    |        |               |
++--------------+----------+--------------------------------------------+--------+---------------+
+| theme        | No       | The GitHub repo URL of a custom            | string | ``""``        |
+|              |          | theme to use, for example:                 |        |               |
+|              |          | ``"https://github.com/seanh/sidecar.git"`` |        |               |
++--------------+----------+--------------------------------------------+--------+---------------+
+| python       | No       | The version of Python to use to build the  | string | ``"3.12"``    |
+|              |          | site, for example: ``"3.12"`` (to use the  |        |               |
+|              |          | most recent version of Python 3.12, this   |        |               |
+|              |          | is faster) or ``"3.12.1"`` (to use an      |        |               |
+|              |          | exact version, slower)                     |        |               |
++--------------+----------+--------------------------------------------+--------+---------------+
 
 For example:
 
@@ -204,6 +214,8 @@ For example:
       settings: "publishconf.py"
       requirements: "pelican[markdown] typogrify"
       output-path: "__output__/"
+      theme: "https://github.com/seanh/sidecar.git"
+      python: "3.12"
 
 Custom 404 Pages
 ----------------
