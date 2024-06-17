@@ -27,6 +27,10 @@ on:
         default: "3.12"
         description: "The version of Python to use, for example: '3.12' (to use the most recent version of Python 3.12, this is faster) or '3.12.1' (to use an exact version, slower)"
         type: string
+      feed_domain:
+        required: false
+        default: ""
+        description: "The domain to be prepended to feed URLs (Pelican's FEED_DOMAIN setting)"
 permissions:
   contents: read
   pages: write
@@ -61,7 +65,7 @@ jobs:
           cmd += " --settings ${{ inputs.settings }}"
           cmd += " --extra-settings"
           cmd += """ SITEURL='"${{ steps.pages.outputs.base_url }}"'"""
-          cmd += """ FEED_DOMAIN='"${{ steps.pages.outputs.origin }}"'"""
+          cmd += """ FEED_DOMAIN='"${{ inputs.feed_domain or steps.pages.outputs.base_url }}"'"""
           cmd += " --output ${{ inputs.output-path }}"
 
           if "${{ inputs.theme }}":
