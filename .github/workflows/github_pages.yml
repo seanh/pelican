@@ -27,10 +27,15 @@ on:
         default: "3.12"
         description: "The version of Python to use, for example: '3.12' (to use the most recent version of Python 3.12, this is faster) or '3.12.1' (to use an exact version, slower)"
         type: string
+      siteurl:
+        required: false
+        default: ""
+        description: "The base URL of your web site (Pelican's SITEURL setting. If not passed this will default to the URL of your GitHub Pages site, which is correct in most cases."
+        type: string
       feed_domain:
         required: false
         default: ""
-        description: "The domain to be prepended to feed URLs (Pelican's FEED_DOMAIN setting)"
+        description: "The domain to be prepended to feed URLs (Pelican's FEED_DOMAIN setting). If not passed this will default to the URL of your GitHub Pages site, which is correct in most cases."
         type: string
 permissions:
   contents: read
@@ -65,7 +70,7 @@ jobs:
           cmd = "pelican"
           cmd += " --settings ${{ inputs.settings }}"
           cmd += " --extra-settings"
-          cmd += """ SITEURL='"${{ steps.pages.outputs.base_url }}"'"""
+          cmd += """ SITEURL='"${{ inputs.siteurl || steps.pages.outputs.base_url }}"'"""
           cmd += """ FEED_DOMAIN='"${{ inputs.feed_domain || steps.pages.outputs.base_url }}"'"""
           cmd += " --output ${{ inputs.output-path }}"
 
