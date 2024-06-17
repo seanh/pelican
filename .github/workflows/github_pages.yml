@@ -31,6 +31,7 @@ on:
         required: false
         default: ""
         description: "The domain to be prepended to feed URLs (Pelican's FEED_DOMAIN setting)"
+        type: string
 permissions:
   contents: read
   pages: write
