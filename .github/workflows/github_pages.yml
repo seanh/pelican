@@ -30,7 +30,7 @@ on:
       siteurl:
         required: false
         default: ""
-        description: "The base URL of your web site (Pelican's SITEURL setting. If not passed this will default to the URL of your GitHub Pages site, which is correct in most cases."
+        description: "The base URL of your web site (Pelican's SITEURL setting). If not passed this will default to the URL of your GitHub Pages site, which is correct in most cases."
         type: string
       feed_domain:
         required: false

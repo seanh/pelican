@@ -176,35 +176,47 @@ for more information.
 A number of optional inputs can be added to the ``with:`` block when calling
 the workflow:
 
-+--------------+----------+--------------------------------------------+--------+---------------+
-| Name         | Required | Description                                | Type   | Default       |
-+==============+==========+============================================+========+===============+
-| settings     | Yes      | The path to your Pelican settings          | string |               |
-|              |          | file (``pelican``'s                        |        |               |
-|              |          | ``--settings`` option),                    |        |               |
-|              |          | for example: ``"publishconf.py"``          |        |               |
-+--------------+----------+--------------------------------------------+--------+---------------+
-| requirements | No       | The Python requirements to                 | string | ``"pelican"`` |
-|              |          | install, for example to enable             |        |               |
-|              |          | markdown and typogrify use:                |        |               |
-|              |          | ``"pelican[markdown] typogrify"``          |        |               |
-|              |          | or if you have a requirements              |        |               |
-|              |          | file: ``"-r requirements.txt"``            |        |               |
-+--------------+----------+--------------------------------------------+--------+---------------+
-| output-path  | No       | Where to output the generated              | string | ``"output/"`` |
-|              |          | files (``pelican``'s ``--output``          |        |               |
-|              |          | option)                                    |        |               |
-+--------------+----------+--------------------------------------------+--------+---------------+
-| theme        | No       | The GitHub repo URL of a custom            | string | ``""``        |
-|              |          | theme to use, for example:                 |        |               |
-|              |          | ``"https://github.com/seanh/sidecar.git"`` |        |               |
-+--------------+----------+--------------------------------------------+--------+---------------+
-| python       | No       | The version of Python to use to build the  | string | ``"3.12"``    |
-|              |          | site, for example: ``"3.12"`` (to use the  |        |               |
-|              |          | most recent version of Python 3.12, this   |        |               |
-|              |          | is faster) or ``"3.12.1"`` (to use an      |        |               |
-|              |          | exact version, slower)                     |        |               |
-+--------------+----------+--------------------------------------------+--------+---------------+
++------------------+----------+--------------------------------------------+--------+---------------+
+| Name             | Required | Description                                | Type   | Default       |
++==================+==========+============================================+========+===============+
+| ``settings``     | Yes      | The path to your Pelican settings          | string |               |
+|                  |          | file (``pelican``'s                        |        |               |
+|                  |          | ``--settings`` option),                    |        |               |
+|                  |          | for example: ``"publishconf.py"``          |        |               |
++------------------+----------+--------------------------------------------+--------+---------------+
+| ``requirements`` | No       | The Python requirements to                 | string | ``"pelican"`` |
+|                  |          | install, for example to enable             |        |               |
+|                  |          | markdown and typogrify use:                |        |               |
+|                  |          | ``"pelican[markdown] typogrify"``          |        |               |
+|                  |          | or if you have a requirements              |        |               |
+|                  |          | file: ``"-r requirements.txt"``            |        |               |
++------------------+----------+--------------------------------------------+--------+---------------+
+| ``output-path``  | No       | Where to output the generated              | string | ``"output/"`` |
+|                  |          | files (``pelican``'s ``--output``          |        |               |
+|                  |          | option)                                    |        |               |
++------------------+----------+--------------------------------------------+--------+---------------+
+| ``theme``        | No       | The GitHub repo URL of a custom            | string | ``""``        |
+|                  |          | theme to use, for example:                 |        |               |
+|                  |          | ``"https://github.com/seanh/sidecar.git"`` |        |               |
++------------------+----------+--------------------------------------------+--------+---------------+
+| ``python``       | No       | The version of Python to use to build the  | string | ``"3.12"``    |
+|                  |          | site, for example: ``"3.12"`` (to use the  |        |               |
+|                  |          | most recent version of Python 3.12, this   |        |               |
+|                  |          | is faster) or ``"3.12.1"`` (to use an      |        |               |
+|                  |          | exact version, slower)                     |        |               |
++------------------+----------+--------------------------------------------+--------+---------------+
+| ``siteurl``      | No       | The base URL of your web site (Pelican's   | string | The URL of    |
+|                  |          | ``SITEURL`` setting). If not passed this   |        | your GitHub   |
+|                  |          | will default to the URL of your GitHub     |        | Pages site.   |
+|                  |          | Pages site, which is correct in most       |        |               |
+|                  |          | cases.                                     |        |               |
++------------------+----------+--------------------------------------------+--------+---------------+
+| ``feed_domain``  |          | The domain to be prepended to feed URLs    | string | The URL of    |
+|                  |          | (Pelican's ``FEED_DOMAIN`` setting). If    |        | your GitHub   |
+|                  |          | not passed this will default to the URL of |        | Pages site.   |
+|                  |          | your GitHub Pages site, which is correct   |        |               |
+|                  |          | in most cases.                             |        |               |
++------------------+----------+--------------------------------------------+--------+---------------+
 
 For example:
 
